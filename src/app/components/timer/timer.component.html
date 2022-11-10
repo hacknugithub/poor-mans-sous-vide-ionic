@@ -1,0 +1,44 @@
+<ion-card>
+<ion-card-header color="primary">
+  <ion-card-title>Cooking Timer</ion-card-title>
+</ion-card-header>
+<ion-card-content>
+  <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-chip class="chip-element" outline color="primary">
+            <ion-label color="primary">{{time.hours}} Hours</ion-label>
+          </ion-chip>
+          <ion-chip class="chip-element" outline color="primary">
+            <ion-label color="primary">{{time.minutes}} Minutes</ion-label>
+          </ion-chip>
+          <ion-chip class="chip-element" outline color="primary">
+            <ion-label color="primary">{{time.seconds}} Seconds</ion-label>
+          </ion-chip>
+        </ion-col>
+        <!-- <countdown units=" Hours | Minutes | Seconds"  end="{{time.hours}}:{{time.minutes}}:{{time.seconds}}"></countdown> -->
+      </ion-row>
+      <ion-item-group>
+        <ion-item>
+          <ion-label>Temperatura de Coccion: </ion-label> {{temp.init}}°C
+        </ion-item>
+        <ion-item>
+            <ion-label>Temperatura Actual: </ion-label> {{temp.actual}}°C
+        </ion-item>
+        <ion-item>
+            <ion-label>Calentando: </ion-label><ion-icon color="{{heating}}" slot="end" name="flame"></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-label>Estado: </ion-label> {{processStat}}
+      </ion-item>
+      </ion-item-group>
+
+      <ion-item-group class="btn-timer">
+        <ion-button color="primary" size="small" (click)="startProcess()" [disabled]="!timerStat">Get Cookin</ion-button>
+        <ion-button fill="outline" color="danger" size="small" (click)="stopTimer()" [disabled]="timerStat">Stop</ion-button>
+      </ion-item-group>
+      
+  </ion-grid>
+</ion-card-content>
+
+</ion-card>

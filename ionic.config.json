@@ -1,5 +1,7 @@
 {
   "name": "PoorsManSV",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

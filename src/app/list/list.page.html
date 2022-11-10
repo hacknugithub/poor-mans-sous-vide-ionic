@@ -4,24 +4,40 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      List
+      Empezar
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-item *ngFor="let item of items">
-      <ion-icon [name]="item.icon" slot="start"></ion-icon>
-      {{item.title}}
-      <div class="item-note" slot="end">
-        {{item.note}}
-      </div>
-    </ion-item>
-  </ion-list>
-  <!--
-    <div *ngIf="selectedItem" padding>
-      You navigated here from <b>{{selectedItem.title }}</b>
-    </div>
-  -->
+<ion-content padding>
+
+<form [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)">
+  <ion-item>
+    <ion-label position="fixed">Temperature</ion-label>
+    <ion-input formControlName="temp" placeholder="Set cooking temperature" type="number"></ion-input>
+  </ion-item>
+  <!-- validacion temperatura -->
+  <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.temp">
+        <div class="error-message" *ngIf="validations_form.get('temp').hasError(validation.type) && (validations_form.get('temp').dirty || validations_form.get('temp').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+  </div>
+  <ion-item>
+      <ion-label>Cooking Time</ion-label>
+      <ion-datetime formControlName="cookTime" type="text" pickerFormat="HH:mm:ss" displayFormat="HH:mm:ss" min="00:05:00" max="08:00:00"></ion-datetime>
+  </ion-item>
+  <!-- validacion de tiempo de coccion -->
+  <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.cookTime">
+        <div class="error-message" *ngIf="validations_form.get('cookTime').hasError(validation.type) && (validations_form.get('cookTime').dirty || validations_form.get('cookTime').touched)">
+          <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+        </div>
+      </ng-container>
+  </div>
+  <ion-button type="submit" fill="outline" expand="block" size="default" [disabled]="!validations_form.valid"> Start </ion-button>
+</form>
+
+
 </ion-content>
